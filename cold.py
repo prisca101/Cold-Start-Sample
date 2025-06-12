@@ -357,15 +357,19 @@ with content:
         st.session_state.actual_isbns = actual_isbns
         st.session_state.rating_dict = rating_dict  # Store the rating dictionary
 
-    st.metric("Recommendation Precision", 
-    f"{len(st.session_state.overlap)}/{len(st.session_state.actual_isbns)} matches",
-    help="Number of recommended books that user actually interacted with in the test set")
+    
 
 
 
 # Check if we have recommendations to show
 if "show_recommendations" in st.session_state and st.session_state.show_recommendations:
     
+    col1, col2, col3 = st.columns(3)
+    with col2:
+        st.metric("Recommendation Precision", 
+        f"{len(st.session_state.overlap)}/{len(st.session_state.actual_isbns)} matches",
+        help="Number of recommended books that user actually interacted with in the test set")
+
     st.image("banner_rec.png", use_container_width=True) 
  
     st.markdown("  \n")
