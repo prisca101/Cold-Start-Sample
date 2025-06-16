@@ -40,6 +40,7 @@ model, data = load_assets()
 
 # Access the features
 user_features_test = data['user_features_test']
+item_features= data['item_features']
 books_df = data['books_df']
 users_df = data['users_df']
 user_id_mapping = data['user_id_mapping']
@@ -333,6 +334,7 @@ with content:
             user_ids=user_internal_id,
             item_ids=np.arange(len(item_id_mapping)),
             user_features=user_features_test,
+            item_features=item_features,
             num_threads=4
         )
 
@@ -363,6 +365,7 @@ with content:
 
 # Check if we have recommendations to show
 if "show_recommendations" in st.session_state and st.session_state.show_recommendations:
+    st.session_state.selected_book = None # Reset selected book when showing recommendations
     
     col1, col2, col3 = st.columns(3)
     with col2:
