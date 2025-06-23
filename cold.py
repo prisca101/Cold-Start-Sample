@@ -267,7 +267,7 @@ with st.container():
         with col2:
             selected_user = st.selectbox(
                 "Select a Cold-Start User Sample:",
-                cold_user_ids[70:81]
+                cold_user_ids[100:111]
             )
 
         user_data = users_df[users_df['User-ID'] == selected_user].iloc[0]
@@ -275,40 +275,40 @@ with st.container():
         st.markdown("  \n")
         st.markdown("  \n")
 
-        # col1, col2 = st.columns(2)
-        # with col1:
-        #     st.markdown(
-        #         f"""
-        #         <div style='text-align: center; font-size: 1.5rem; font-weight: bold;'>
-        #             Top 3 Genres
-        #         </div>
-        #         """, unsafe_allow_html=True)
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown(
+                f"""
+                <div style='text-align: center; font-size: 1.5rem; font-weight: bold;'>
+                    Top Genres
+                </div>
+                """, unsafe_allow_html=True)
 
-        #     genres = user_data['fav_genres']
-        #     if isinstance(genres, list):
-        #         genre_pills = "".join(
-        #             [f'<span class="genre-pill">{g}</span>' 
-        #             for g in genres[:3]]
-        #         )
-        #         st.markdown(f'<div class="genre-container">{genre_pills}</div>', 
-        #                     unsafe_allow_html=True)
+            genres = user_data['fav_genres']
+            if isinstance(genres, list):
+                genre_pills = "".join(
+                    [f'<span class="genre-pill">{g}</span>' 
+                    for g in genres[:3]]
+                )
+                st.markdown(f'<div class="genre-container">{genre_pills}</div>', 
+                            unsafe_allow_html=True)
 
-        # with col2:
-        st.markdown(
-            f"""
-            <div style='text-align: center; font-size: 1.5rem; font-weight: bold;'>
-                Top 3 Authors
-            </div>
-            """, unsafe_allow_html=True)
-        
-        authors = user_data["fav_authors"]
-        if isinstance(authors, list):
-            author_pills = "".join(
-                [f'<span class="genre-pill">{a}</span>' 
-                for a in authors[:3]]
-            )
-            st.markdown(f'<div class="genre-container">{author_pills}</div>', 
-                        unsafe_allow_html=True)
+        with col2:
+            st.markdown(
+                f"""
+                <div style='text-align: center; font-size: 1.5rem; font-weight: bold;'>
+                    Top Authors
+                </div>
+                """, unsafe_allow_html=True)
+            
+            authors = user_data["fav_authors"]
+            if isinstance(authors, list):
+                author_pills = "".join(
+                    [f'<span class="genre-pill">{a}</span>' 
+                    for a in authors[:3]]
+                )
+                st.markdown(f'<div class="genre-container">{author_pills}</div>', 
+                            unsafe_allow_html=True)
 
 
 
@@ -352,12 +352,13 @@ with content:
 
         overlap = set(recommended_isbns) & set(actual_isbns)
 
-        # Store recommendations in session state
-        st.session_state.recommended_isbns = recommended_isbns
-        st.session_state.show_recommendations = True
-        st.session_state.overlap = overlap
-        st.session_state.actual_isbns = actual_isbns
-        st.session_state.rating_dict = rating_dict  # Store the rating dictionary
+        with st.spinner("Wait for it..."): 
+            # Store recommendations in session state
+            st.session_state.recommended_isbns = recommended_isbns
+            st.session_state.show_recommendations = True
+            st.session_state.overlap = overlap
+            st.session_state.actual_isbns = actual_isbns
+            st.session_state.rating_dict = rating_dict  # Store the rating dictionary
 
     
 
