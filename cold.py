@@ -267,7 +267,7 @@ with st.container():
         with col2:
             selected_user = st.selectbox(
                 "Select a Cold-Start User Sample:",
-                cold_user_ids[100:111]
+                cold_user_ids[639:650]
             )
 
         user_data = users_df[users_df['User-ID'] == selected_user].iloc[0]
